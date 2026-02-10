@@ -1,0 +1,24 @@
+name: cofeenator
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.3
+
+dependencies:
+  bloc: ^9.2.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+
+dev_dependencies:
+  bloc_lint: ">=0.3.3 <0.3.6"
+  bloc_test: ^10.0.0
+  bloc_tools: ^0.1.0-dev.20
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^10.1.0
+
+flutter:
+  uses-material-design: true
