@@ -1,0 +1,19 @@
+import 'package:cofeenator/ui/favorites/view/favorites_view.dart';
+import 'package:cofeenator/ui/widgets/coffeenator_background.dart';
+import 'package:flutter/material.dart';
+
+class FavoritesPage extends StatelessWidget {
+  const FavoritesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Favorites'),
+      ),
+      body: const CoffeenatorBackground(
+        child: FavoritesView(),
+      ),
+    );
+  }
+}
