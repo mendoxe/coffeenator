@@ -12,3 +12,6 @@ analyzer:
     avoid_catches_without_on_clauses: ignore
     cascade_invocations: ignore
     discarded_futures: ignore
+bloc:
+  rules:
+    prefer_void_public_cubit_methods: false
