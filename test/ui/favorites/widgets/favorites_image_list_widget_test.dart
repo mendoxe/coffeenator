@@ -18,7 +18,8 @@ import '../../../helper/mock_image.dart';
 
 class _MockLocalImageRepository extends Mock implements LocalImageRepository {}
 
-class _MockLocalImageListCubit extends MockCubit<LocalImageListState> implements LocalImageListCubit {}
+class _MockLocalImageListCubit extends MockCubit<LocalImageListState>
+    implements LocalImageListCubit {}
 
 void main() {
   group('FavoritesImageListWidget', () {
@@ -53,7 +54,9 @@ void main() {
       );
     }
 
-    testWidgets('renders FavoritesImageListWidget for the given hash', (tester) async {
+    testWidgets('renders FavoritesImageListWidget for the given hash', (
+      tester,
+    ) async {
       when(() => repo.getImage('hash1')).thenAnswer((_) async => fakeBytes);
 
       await tester.pumpWidget(buildSubject());
@@ -97,7 +100,9 @@ void main() {
     testWidgets(
       'shows error snackbar when state transitions to Error',
       (tester) async {
-        when(() => repo.getImage('hash1')).thenAnswer((_) async => throw Exception('disk error'));
+        when(
+          () => repo.getImage('hash1'),
+        ).thenAnswer((_) async => throw Exception('disk error'));
 
         await tester.pumpWidget(buildSubject());
         await tester.pump(const Duration(milliseconds: 200));
@@ -110,7 +115,9 @@ void main() {
       'calls deleteCurrentImage and loadAll on button tap',
       (tester) async {
         when(() => repo.getImage('hash1')).thenAnswer((_) async => fakeBytes);
-        when(() => repo.deleteImageByHash('hash1')).thenAnswer((_) async => true);
+        when(
+          () => repo.deleteImageByHash('hash1'),
+        ).thenAnswer((_) async => true);
         when(() => listCubit.loadAll()).thenAnswer((_) async {});
 
         await tester.pumpWidget(buildSubject());

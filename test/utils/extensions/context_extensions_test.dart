@@ -129,11 +129,13 @@ void main() {
                     return Column(
                       children: [
                         ElevatedButton(
-                          onPressed: () => context.showSnackBar('First message'),
+                          onPressed: () =>
+                              context.showSnackBar('First message'),
                           child: const Text('First'),
                         ),
                         ElevatedButton(
-                          onPressed: () => context.showSnackBar('Second message'),
+                          onPressed: () =>
+                              context.showSnackBar('Second message'),
                           child: const Text('Second'),
                         ),
                       ],

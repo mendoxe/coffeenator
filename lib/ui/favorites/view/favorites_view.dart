@@ -15,19 +15,23 @@ class FavoritesView extends StatelessWidget {
     return BlocBuilder<LocalImageListCubit, LocalImageListState>(
       builder: (context, state) {
         return switch (state) {
-          LocalImageListStateLoading() || LocalImageListStateInitial() => const Center(child: CoffeenatorLoadingSpinner()),
+          LocalImageListStateLoading() || LocalImageListStateInitial() =>
+            const Center(child: CoffeenatorLoadingSpinner()),
           LocalImageListStateError() => const CoffeenatorErrorWidget(),
-          LocalImageListStateLoaded(:final imageHashes) when imageHashes.isEmpty => Center(
-            child: Text(
-              'Nothing saved yet, go ahead and save some images!',
-              style: Theme.of(context).textTheme.bodyLarge.bold,
-              textAlign: TextAlign.center,
+          LocalImageListStateLoaded(:final imageHashes)
+              when imageHashes.isEmpty =>
+            Center(
+              child: Text(
+                'Nothing saved yet, go ahead and save some images!',
+                style: Theme.of(context).textTheme.bodyLarge.bold,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          LocalImageListStateLoaded(:final imageHashes) => FavoritesImageListWidget(
-            key: ValueKey(imageHashes),
-            imageHashes: imageHashes,
-          ),
+          LocalImageListStateLoaded(:final imageHashes) =>
+            FavoritesImageListWidget(
+              key: ValueKey(imageHashes),
+              imageHashes: imageHashes,
+            ),
         };
       },
     );

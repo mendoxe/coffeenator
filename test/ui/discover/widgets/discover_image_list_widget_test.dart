@@ -19,13 +19,16 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../helper/mock_image.dart';
 
-class _MockDiscoverImageCubit extends MockCubit<DiscoverImageCubitState> implements DiscoverImageCubit {}
+class _MockDiscoverImageCubit extends MockCubit<DiscoverImageCubitState>
+    implements DiscoverImageCubit {}
 
-class _MockLocalImageListCubit extends MockCubit<LocalImageListState> implements LocalImageListCubit {}
+class _MockLocalImageListCubit extends MockCubit<LocalImageListState>
+    implements LocalImageListCubit {}
 
 class _MockLocalImageRepository extends Mock implements LocalImageRepository {}
 
-class _MockSaveImageCubit extends MockCubit<SaveImageState> implements SaveImageCubit {}
+class _MockSaveImageCubit extends MockCubit<SaveImageState>
+    implements SaveImageCubit {}
 
 void main() {
   group('DiscoverImageListWidget', () {
@@ -46,7 +49,9 @@ void main() {
       localRepo = _MockLocalImageRepository();
       saveCubit = _MockSaveImageCubit();
 
-      when(() => discoverCubit.state).thenReturn(DiscoverImageCubitStateInitial());
+      when(
+        () => discoverCubit.state,
+      ).thenReturn(DiscoverImageCubitStateInitial());
       when(() => discoverCubit.fetchImage()).thenAnswer((_) async => true);
       when(() => listCubit.state).thenReturn(LocalImageListStateInitial());
       when(() => localRepo.isImageSaved(any())).thenAnswer((_) async => false);
@@ -167,7 +172,9 @@ void main() {
       testWidgets(
         'image is liked when the like button is pressed',
         (tester) async {
-          when(() => saveCubit.saveCurrentImage()).thenAnswer((_) async => true);
+          when(
+            () => saveCubit.saveCurrentImage(),
+          ).thenAnswer((_) async => true);
           when(() => listCubit.loadAll()).thenAnswer((_) async => {});
           when(() => saveCubit.state).thenReturn(SaveImageStateInitial());
 
@@ -177,7 +184,9 @@ void main() {
               child: BlocProvider<SaveImageCubit>.value(
                 value: saveCubit,
                 child: MaterialApp(
-                  home: Scaffold(body: DiscoverImageCardWrapper(bytes: fakeBytes)),
+                  home: Scaffold(
+                    body: DiscoverImageCardWrapper(bytes: fakeBytes),
+                  ),
                 ),
               ),
             ),
@@ -195,7 +204,9 @@ void main() {
       testWidgets(
         'image is removed from liked when the dislike button is pressed',
         (tester) async {
-          when(() => saveCubit.deleteCurrentImage()).thenAnswer((_) async => true);
+          when(
+            () => saveCubit.deleteCurrentImage(),
+          ).thenAnswer((_) async => true);
           when(() => listCubit.loadAll()).thenAnswer((_) async => {});
           when(() => saveCubit.state).thenReturn(SaveImageStateSaved());
 
@@ -205,7 +216,9 @@ void main() {
               child: BlocProvider<SaveImageCubit>.value(
                 value: saveCubit,
                 child: MaterialApp(
-                  home: Scaffold(body: DiscoverImageCardWrapper(bytes: fakeBytes)),
+                  home: Scaffold(
+                    body: DiscoverImageCardWrapper(bytes: fakeBytes),
+                  ),
                 ),
               ),
             ),

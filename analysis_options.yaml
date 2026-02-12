@@ -9,3 +9,6 @@ linter:
 analyzer:
   errors:
     lines_longer_than_80_chars: ignore
+    avoid_catches_without_on_clauses: ignore
+    cascade_invocations: ignore
+    discarded_futures: ignore

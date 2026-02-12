@@ -9,7 +9,8 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 class LocalImageRepository {
-  LocalImageRepository(this._box, [Logger? logger]) : _logger = logger ?? Logger();
+  LocalImageRepository(this._box, [Logger? logger])
+    : _logger = logger ?? Logger();
 
   final Box<String> _box;
   final Logger _logger;
@@ -55,7 +56,9 @@ class LocalImageRepository {
     _logger.t('Saving image locally');
     final imageHash = await _getImageHash(image);
     if (_box.containsKey(imageHash)) {
-      _logger.w('Local image $imageHash already exists in Hive, skipping saving');
+      _logger.w(
+        'Local image $imageHash already exists in Hive, skipping saving',
+      );
       return;
     }
     await _saveImageToDisk(image, imageHash);

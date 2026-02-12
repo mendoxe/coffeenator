@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class FavoritesImageCard extends StatelessWidget {
-  const FavoritesImageCard({required this.onActionButtonClick, required this.bytes, super.key});
+  const FavoritesImageCard({
+    required this.onActionButtonClick,
+    required this.bytes,
+    super.key,
+  });
 
   final Uint8List bytes;
   final VoidCallback onActionButtonClick;

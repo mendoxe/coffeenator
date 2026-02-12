@@ -50,70 +50,76 @@ void main() {
       expect(changedToPage, 1);
     });
 
-    testWidgets('calls onPageChanged only when actual page changes, not just random touches', (tester) async {
-      var changedToPage = -1;
+    testWidgets(
+      'calls onPageChanged only when actual page changes, not just random touches',
+      (tester) async {
+        var changedToPage = -1;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SizedBox(
-              height: 400,
-              child: FadingPageView(
-                itemCount: 3,
-                onPageChanged: (page) {
-                  changedToPage = page;
-                },
-                itemBuilder: (context, index) => Center(
-                  child: Text('Page $index'),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SizedBox(
+                height: 400,
+                child: FadingPageView(
+                  itemCount: 3,
+                  onPageChanged: (page) {
+                    changedToPage = page;
+                  },
+                  itemBuilder: (context, index) => Center(
+                    child: Text('Page $index'),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.drag(find.byType(PageView), const Offset(0, -20));
-      await tester.pumpAndSettle();
+        await tester.drag(find.byType(PageView), const Offset(0, -20));
+        await tester.pumpAndSettle();
 
-      expect(changedToPage, -1);
-    });
+        expect(changedToPage, -1);
+      },
+    );
 
-    testWidgets('onPageChanged is called with correct value when swiping up and down', (tester) async {
-      var changedToPage = -1;
+    testWidgets(
+      'onPageChanged is called with correct value when swiping up and down',
+      (tester) async {
+        var changedToPage = -1;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SizedBox(
-              height: 400,
-              child: FadingPageView(
-                itemCount: 3,
-                onPageChanged: (page) {
-                  changedToPage = page;
-                },
-                itemBuilder: (context, index) => Center(
-                  child: Text('Page $index'),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SizedBox(
+                height: 400,
+                child: FadingPageView(
+                  itemCount: 3,
+                  onPageChanged: (page) {
+                    changedToPage = page;
+                  },
+                  itemBuilder: (context, index) => Center(
+                    child: Text('Page $index'),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.drag(find.byType(PageView), const Offset(0, -400));
-      await tester.pumpAndSettle();
+        await tester.drag(find.byType(PageView), const Offset(0, -400));
+        await tester.pumpAndSettle();
 
-      expect(changedToPage, 1);
+        expect(changedToPage, 1);
 
-      await tester.drag(find.byType(PageView), const Offset(0, -400));
-      await tester.pumpAndSettle();
+        await tester.drag(find.byType(PageView), const Offset(0, -400));
+        await tester.pumpAndSettle();
 
-      expect(changedToPage, 2);
+        expect(changedToPage, 2);
 
-      await tester.drag(find.byType(PageView), const Offset(0, 400));
-      await tester.pumpAndSettle();
+        await tester.drag(find.byType(PageView), const Offset(0, 400));
+        await tester.pumpAndSettle();
 
-      expect(changedToPage, 1);
-    });
+        expect(changedToPage, 1);
+      },
+    );
   });
 }

@@ -59,7 +59,10 @@ class DiscoverImageCard extends StatelessWidget {
           },
           listener: (context, state) {
             if (state is SaveImageStateError) {
-              context.showSnackBar('Something went wrong.', type: SnackBarType.error);
+              context.showSnackBar(
+                'Something went wrong.',
+                type: SnackBarType.error,
+              );
             }
           },
         ),

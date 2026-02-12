@@ -83,7 +83,9 @@ class _FadingPageViewState extends State<FadingPageView> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: alignment,
-                  end: alignment == Alignment.topCenter ? Alignment.bottomCenter : Alignment.topCenter,
+                  end: alignment == Alignment.topCenter
+                      ? Alignment.bottomCenter
+                      : Alignment.topCenter,
                   colors: [
                     Theme.of(context).scaffoldBackgroundColor,
                     Theme.of(context).scaffoldBackgroundColor.withValues(

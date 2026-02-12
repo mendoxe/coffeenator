@@ -25,7 +25,9 @@ void main() {
       blocTest<LocalImageListCubit, LocalImageListState>(
         'emits [Loading, Loaded] with hashes on success',
         setUp: () {
-          when(() => repository.getAllLocalImageHashes()).thenReturn(['hash1', 'hash2']);
+          when(
+            () => repository.getAllLocalImageHashes(),
+          ).thenReturn(['hash1', 'hash2']);
         },
         build: () => LocalImageListCubit(repository),
         act: (cubit) => cubit.loadAll(),
@@ -59,7 +61,9 @@ void main() {
       blocTest<LocalImageListCubit, LocalImageListState>(
         'emits [Loading, Error] when repository throws',
         setUp: () {
-          when(() => repository.getAllLocalImageHashes()).thenThrow(Exception('hive error'));
+          when(
+            () => repository.getAllLocalImageHashes(),
+          ).thenThrow(Exception('hive error'));
         },
         build: () => LocalImageListCubit(repository),
         act: (cubit) => cubit.loadAll(),

@@ -13,7 +13,8 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../helper/mock_image.dart';
 
-class _MockSaveImageCubit extends MockCubit<SaveImageState> implements SaveImageCubit {}
+class _MockSaveImageCubit extends MockCubit<SaveImageState>
+    implements SaveImageCubit {}
 
 void main() {
   group('DiscoverImageCard', () {

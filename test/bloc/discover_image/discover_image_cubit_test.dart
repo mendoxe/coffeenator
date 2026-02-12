@@ -7,7 +7,8 @@ import 'package:cofeenator/repository/remote_image_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class _MockRemoteImageRepository extends Mock implements RemoteImageRepository {}
+class _MockRemoteImageRepository extends Mock
+    implements RemoteImageRepository {}
 
 void main() {
   group('DiscoverImageCubit', () {
@@ -38,7 +39,11 @@ void main() {
         act: (cubit) => cubit.fetchImage(),
         expect: () => [
           isA<DiscoverImageCubitStateLoading>(),
-          isA<DiscoverImageCubitStateLoaded>().having((s) => s.images, 'images', hasLength(1)),
+          isA<DiscoverImageCubitStateLoaded>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
         ],
         verify: (_) {
           verify(() => repository.getImage()).called(1);
@@ -48,7 +53,9 @@ void main() {
       blocTest<DiscoverImageCubit, DiscoverImageCubitState>(
         'emits [Loading, Error] when getImage throws',
         setUp: () {
-          when(() => repository.getImage()).thenThrow(Exception('network error'));
+          when(
+            () => repository.getImage(),
+          ).thenThrow(Exception('network error'));
         },
         build: () => DiscoverImageCubit(repository),
         act: (cubit) => cubit.fetchImage(),
@@ -76,9 +83,21 @@ void main() {
         },
         expect: () => [
           isA<DiscoverImageCubitStateLoading>(),
-          isA<DiscoverImageCubitStateLoaded>().having((s) => s.images, 'images', hasLength(1)),
-          isA<DiscoverImageCubitStateLoading>().having((s) => s.images, 'images', hasLength(1)),
-          isA<DiscoverImageCubitStateLoaded>().having((s) => s.images, 'images', hasLength(2)),
+          isA<DiscoverImageCubitStateLoaded>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
+          isA<DiscoverImageCubitStateLoading>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
+          isA<DiscoverImageCubitStateLoaded>().having(
+            (s) => s.images,
+            'images',
+            hasLength(2),
+          ),
         ],
       );
 
@@ -101,9 +120,21 @@ void main() {
         },
         expect: () => [
           isA<DiscoverImageCubitStateLoading>(),
-          isA<DiscoverImageCubitStateLoaded>().having((s) => s.images, 'images', hasLength(1)),
-          isA<DiscoverImageCubitStateLoading>().having((s) => s.images, 'images', hasLength(1)),
-          isA<DiscoverImageCubitStateError>().having((s) => s.images, 'images', hasLength(1)),
+          isA<DiscoverImageCubitStateLoaded>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
+          isA<DiscoverImageCubitStateLoading>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
+          isA<DiscoverImageCubitStateError>().having(
+            (s) => s.images,
+            'images',
+            hasLength(1),
+          ),
         ],
       );
     });

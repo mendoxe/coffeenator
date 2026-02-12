@@ -11,7 +11,9 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class _MockBox extends Mock implements Box<String> {}
 
-class _FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
+class _FakePathProviderPlatform extends Fake
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
   _FakePathProviderPlatform(this.tempDir);
   final String tempDir;
 
@@ -110,30 +112,38 @@ void main() {
         expect(result, isNull);
       });
 
-      test('returns null when hash is in box but file missing on disk', () async {
-        when(() => box.containsKey('noLocalFile')).thenReturn(true);
+      test(
+        'returns null when hash is in box but file missing on disk',
+        () async {
+          when(() => box.containsKey('noLocalFile')).thenReturn(true);
 
-        final result = await repository.getImage('noLocalFile');
+          final result = await repository.getImage('noLocalFile');
 
-        expect(result, isNull);
-      });
+          expect(result, isNull);
+        },
+      );
 
-      test('returns bytes when hash is in box and file exists on disk', () async {
-        final filePath = '${tempDir.path}/ondisk';
-        await File(filePath).writeAsBytes(fakeImage);
+      test(
+        'returns bytes when hash is in box and file exists on disk',
+        () async {
+          final filePath = '${tempDir.path}/ondisk';
+          await File(filePath).writeAsBytes(fakeImage);
 
-        when(() => box.containsKey('ondisk')).thenReturn(true);
+          when(() => box.containsKey('ondisk')).thenReturn(true);
 
-        final result = await repository.getImage('ondisk');
+          final result = await repository.getImage('ondisk');
 
-        expect(result, equals(fakeImage));
-      });
+          expect(result, equals(fakeImage));
+        },
+      );
     });
 
     group('saveImage', () {
       test('saves image to disk and hash to box', () async {
         when(() => box.containsKey(expectedHash)).thenReturn(false);
-        when(() => box.put(expectedHash, expectedHash)).thenAnswer((_) async {});
+        when(
+          () => box.put(expectedHash, expectedHash),
+        ).thenAnswer((_) async {});
 
         await repository.saveImage(fakeImage);
 

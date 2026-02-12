@@ -18,18 +18,23 @@ class DiscoverView extends StatelessWidget {
           child: BlocBuilder<DiscoverImageCubit, DiscoverImageCubitState>(
             builder: (context, state) {
               return switch (state) {
-                DiscoverImageCubitStateInitial() => const Center(child: CoffeenatorLoadingSpinner()),
-                DiscoverImageCubitStateError(:final images, :final message) => DiscoverImageListWidget(
-                  errorMessage: message,
-                  images: images,
+                DiscoverImageCubitStateInitial() => const Center(
+                  child: CoffeenatorLoadingSpinner(),
                 ),
-                DiscoverImageCubitStateLoading(:final images) => DiscoverImageListWidget(
-                  isLoading: true,
-                  images: images,
-                ),
-                DiscoverImageCubitStateLoaded(:final images) => DiscoverImageListWidget(
-                  images: images,
-                ),
+                DiscoverImageCubitStateError(:final images, :final message) =>
+                  DiscoverImageListWidget(
+                    errorMessage: message,
+                    images: images,
+                  ),
+                DiscoverImageCubitStateLoading(:final images) =>
+                  DiscoverImageListWidget(
+                    isLoading: true,
+                    images: images,
+                  ),
+                DiscoverImageCubitStateLoaded(:final images) =>
+                  DiscoverImageListWidget(
+                    images: images,
+                  ),
               };
             },
           ),
@@ -42,7 +47,9 @@ class DiscoverView extends StatelessWidget {
               Theme.of(
                 context,
               ).textTheme.labelMedium.bold?.copyWith(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.7),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.7),
               ),
         ),
       ],

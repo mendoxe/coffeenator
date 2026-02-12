@@ -1,3 +1,4 @@
 abstract final class HivePaths {
-  static const String localImagesRepositoryBoxKey = 'localImagesRepositoryBoxKey';
+  static const String localImagesRepositoryBoxKey =
+      'localImagesRepositoryBoxKey';
 }

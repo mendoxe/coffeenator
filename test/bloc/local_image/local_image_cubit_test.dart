@@ -43,7 +43,11 @@ void main() {
         act: (cubit) => cubit.loadImage(),
         expect: () => [
           isA<LocalImageStateLoading>(),
-          isA<LocalImageStateLoaded>().having((s) => s.bytes, 'bytes', equals(fakeImage)),
+          isA<LocalImageStateLoaded>().having(
+            (s) => s.bytes,
+            'bytes',
+            equals(fakeImage),
+          ),
         ],
       );
 
@@ -61,14 +65,20 @@ void main() {
         act: (cubit) => cubit.loadImage(),
         expect: () => [
           isA<LocalImageStateLoading>(),
-          isA<LocalImageStateError>().having((s) => s.message, 'message', 'Failed to load image'),
+          isA<LocalImageStateError>().having(
+            (s) => s.message,
+            'message',
+            'Failed to load image',
+          ),
         ],
       );
 
       blocTest<LocalImageCubit, LocalImageState>(
         'emits [Loading, Error] when repository throws',
         setUp: () {
-          when(() => repository.getImage(testHash)).thenThrow(Exception('disk error'));
+          when(
+            () => repository.getImage(testHash),
+          ).thenThrow(Exception('disk error'));
         },
         build: () => LocalImageCubit(
           repository,
@@ -108,7 +118,9 @@ void main() {
       blocTest<LocalImageCubit, LocalImageState>(
         'emits [Loading, Error] on failure',
         setUp: () {
-          when(() => repository.deleteImageByHash(testHash)).thenThrow(Exception('delete failed'));
+          when(
+            () => repository.deleteImageByHash(testHash),
+          ).thenThrow(Exception('delete failed'));
         },
         build: () => LocalImageCubit(
           repository,
@@ -117,7 +129,11 @@ void main() {
         act: (cubit) => cubit.deleteCurrentImage(),
         expect: () => [
           isA<LocalImageStateLoading>(),
-          isA<LocalImageStateError>().having((s) => s.message, 'message', 'Failed to delete image'),
+          isA<LocalImageStateError>().having(
+            (s) => s.message,
+            'message',
+            'Failed to delete image',
+          ),
         ],
       );
 
@@ -134,7 +150,9 @@ void main() {
       });
 
       test('returns false when delete throws', () async {
-        when(() => repository.deleteImageByHash(testHash)).thenThrow(Exception('fail'));
+        when(
+          () => repository.deleteImageByHash(testHash),
+        ).thenThrow(Exception('fail'));
 
         final cubit = LocalImageCubit(repository, imageHash: testHash);
         final result = await cubit.deleteCurrentImage();

@@ -11,7 +11,8 @@ import 'package:mocktail/mocktail.dart';
 
 class _MockLocalImageRepository extends Mock implements LocalImageRepository {}
 
-class _MockRemoteImageRepository extends Mock implements RemoteImageRepository {}
+class _MockRemoteImageRepository extends Mock
+    implements RemoteImageRepository {}
 
 void main() {
   group('CoffeenatorApp', () {

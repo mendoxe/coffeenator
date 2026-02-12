@@ -4,7 +4,9 @@ import 'package:cofeenator/repository/local_image_repository.dart';
 import 'package:logger/logger.dart';
 
 class LocalImageListCubit extends Cubit<LocalImageListState> {
-  LocalImageListCubit(this._repo, [Logger? logger]) : _logger = logger ?? Logger(), super(LocalImageListStateInitial());
+  LocalImageListCubit(this._repo, [Logger? logger])
+    : _logger = logger ?? Logger(),
+      super(LocalImageListStateInitial());
 
   final LocalImageRepository _repo;
   final Logger _logger;

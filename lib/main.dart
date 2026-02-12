@@ -9,7 +9,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  final localImageBox = await Hive.openBox<String>(HivePaths.localImagesRepositoryBoxKey);
+  final localImageBox = await Hive.openBox<String>(
+    HivePaths.localImagesRepositoryBoxKey,
+  );
 
   final localImageRepository = LocalImageRepository(localImageBox);
   final remoteImageRepository = RemoteImageRepository();

@@ -67,7 +67,9 @@ void main() {
       blocTest<SaveImageCubit, SaveImageState>(
         'emits nothing and stays in initial state when check throws (silently caught)',
         setUp: () {
-          when(() => repository.isImageSaved(fakeImage)).thenThrow(Exception('error'));
+          when(
+            () => repository.isImageSaved(fakeImage),
+          ).thenThrow(Exception('error'));
         },
         build: () => SaveImageCubit(
           repository,
@@ -104,7 +106,9 @@ void main() {
       blocTest<SaveImageCubit, SaveImageState>(
         'emits [Loading, Error] when save throws',
         setUp: () {
-          when(() => repository.saveImage(fakeImage)).thenThrow(Exception('save failed'));
+          when(
+            () => repository.saveImage(fakeImage),
+          ).thenThrow(Exception('save failed'));
         },
         build: () => SaveImageCubit(
           repository,
@@ -113,7 +117,11 @@ void main() {
         act: (cubit) => cubit.saveCurrentImage(),
         expect: () => [
           isA<SaveImageStateLoading>(),
-          isA<SaveImageStateError>().having((s) => s.message, 'message', contains('save failed')),
+          isA<SaveImageStateError>().having(
+            (s) => s.message,
+            'message',
+            contains('save failed'),
+          ),
         ],
       );
       test('returns true on successful save', () async {
@@ -129,7 +137,9 @@ void main() {
       });
 
       test('returns false when save throws', () async {
-        when(() => repository.saveImage(fakeImage)).thenThrow(Exception('fail'));
+        when(
+          () => repository.saveImage(fakeImage),
+        ).thenThrow(Exception('fail'));
 
         final cubit = SaveImageCubit(repository, imageBytes: fakeImage);
         final result = await cubit.saveCurrentImage();
@@ -161,7 +171,9 @@ void main() {
       blocTest<SaveImageCubit, SaveImageState>(
         'emits [Loading, Error] when delete throws',
         setUp: () {
-          when(() => repository.deleteImage(fakeImage)).thenThrow(Exception('delete failed'));
+          when(
+            () => repository.deleteImage(fakeImage),
+          ).thenThrow(Exception('delete failed'));
         },
         build: () => SaveImageCubit(
           repository,
@@ -191,7 +203,9 @@ void main() {
       });
 
       test('returns false when delete throws', () async {
-        when(() => repository.deleteImage(fakeImage)).thenThrow(Exception('fail'));
+        when(
+          () => repository.deleteImage(fakeImage),
+        ).thenThrow(Exception('fail'));
 
         final cubit = SaveImageCubit(repository, imageBytes: fakeImage);
         final result = await cubit.deleteCurrentImage();

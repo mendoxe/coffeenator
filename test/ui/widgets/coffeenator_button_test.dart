@@ -5,7 +5,9 @@ import 'package:line_icons/line_icons.dart';
 
 void main() {
   group('CoffeenatorButton', () {
-    testWidgets('renders label text without icon when no icon is provided', (tester) async {
+    testWidgets('renders label text without icon when no icon is provided', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

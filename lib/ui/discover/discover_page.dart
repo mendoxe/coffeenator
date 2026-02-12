@@ -31,7 +31,8 @@ class DiscoverPage extends StatelessWidget {
             title: const Text('Discover'),
             actions: [
               CoffeenatorButton(
-                onTap: () => context.navigateToPage<void>(const FavoritesPage()),
+                onTap: () =>
+                    context.navigateToPage<void>(const FavoritesPage()),
                 icon: LineIcons.heartAlt,
                 label: 'Favorites',
               ),

@@ -26,7 +26,10 @@ class FavoritesImageListWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: BlocProvider(
             create: (context) {
-              final cubit = LocalImageCubit(context.read<LocalImageRepository>(), imageHash: imageHash);
+              final cubit = LocalImageCubit(
+                context.read<LocalImageRepository>(),
+                imageHash: imageHash,
+              );
               cubit.loadImage();
 
               return cubit;
@@ -34,11 +37,14 @@ class FavoritesImageListWidget extends StatelessWidget {
             child: BlocConsumer<LocalImageCubit, LocalImageState>(
               builder: (context, state) {
                 return switch (state) {
-                  LocalImageStateInitial() || LocalImageStateLoading() => const Center(child: CoffeenatorLoadingSpinner()),
+                  LocalImageStateInitial() || LocalImageStateLoading() =>
+                    const Center(child: CoffeenatorLoadingSpinner()),
                   LocalImageStateError() => const CoffeenatorErrorWidget(),
                   LocalImageStateLoaded(:final bytes) => FavoritesImageCard(
                     onActionButtonClick: () async {
-                      final isDeleted = await context.read<LocalImageCubit>().deleteCurrentImage();
+                      final isDeleted = await context
+                          .read<LocalImageCubit>()
+                          .deleteCurrentImage();
                       if (isDeleted) {
                         if (!context.mounted) return;
                         context.read<LocalImageListCubit>().loadAll();
@@ -50,7 +56,10 @@ class FavoritesImageListWidget extends StatelessWidget {
               },
               listener: (context, state) {
                 if (state is LocalImageStateError) {
-                  context.showSnackBar('Something went wrong.', type: SnackBarType.error);
+                  context.showSnackBar(
+                    'Something went wrong.',
+                    type: SnackBarType.error,
+                  );
                 }
               },
             ),

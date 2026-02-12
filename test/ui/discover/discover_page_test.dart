@@ -14,11 +14,13 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../helper/mock_image.dart';
 
-class _MockRemoteImageRepository extends Mock implements RemoteImageRepository {}
+class _MockRemoteImageRepository extends Mock
+    implements RemoteImageRepository {}
 
 class _MockLocalImageRepository extends Mock implements LocalImageRepository {}
 
-class _MockLocalImageListCubit extends MockCubit<LocalImageListState> implements LocalImageListCubit {}
+class _MockLocalImageListCubit extends MockCubit<LocalImageListState>
+    implements LocalImageListCubit {}
 
 void main() {
   group('DiscoverPage', () {
@@ -34,7 +36,9 @@ void main() {
       localImageListCubit = _MockLocalImageListCubit();
 
       when(() => remoteRepo.getImage()).thenAnswer((_) async => fakeBytes);
-      when(() => localImageListCubit.state).thenReturn(LocalImageListStateInitial());
+      when(
+        () => localImageListCubit.state,
+      ).thenReturn(LocalImageListStateInitial());
     });
 
     Widget buildSubject() {

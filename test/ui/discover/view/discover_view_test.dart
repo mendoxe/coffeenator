@@ -16,9 +16,11 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../helper/mock_image.dart';
 
-class _MockDiscoverImageCubit extends MockCubit<DiscoverImageCubitState> implements DiscoverImageCubit {}
+class _MockDiscoverImageCubit extends MockCubit<DiscoverImageCubitState>
+    implements DiscoverImageCubit {}
 
-class _MockLocalImageListCubit extends MockCubit<LocalImageListState> implements LocalImageListCubit {}
+class _MockLocalImageListCubit extends MockCubit<LocalImageListState>
+    implements LocalImageListCubit {}
 
 class _MockLocalImageRepository extends Mock implements LocalImageRepository {}
 

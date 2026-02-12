@@ -4,7 +4,9 @@ import 'package:cofeenator/repository/remote_image_repository.dart';
 import 'package:logger/logger.dart';
 
 class DiscoverImageCubit extends Cubit<DiscoverImageCubitState> {
-  DiscoverImageCubit(this._repository, [Logger? logger]) : _logger = logger ?? Logger(), super(DiscoverImageCubitStateInitial());
+  DiscoverImageCubit(this._repository, [Logger? logger])
+    : _logger = logger ?? Logger(),
+      super(DiscoverImageCubitStateInitial());
 
   final RemoteImageRepository _repository;
   final Logger _logger;
