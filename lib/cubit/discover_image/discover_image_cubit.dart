@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:cofeenator/bloc/discover_image/discover_image_cubit_state.dart';
+import 'package:cofeenator/cubit/discover_image/discover_image_cubit_state.dart';
 import 'package:cofeenator/repository/remote_image_repository.dart';
 import 'package:logger/logger.dart';
 
@@ -18,8 +18,9 @@ class DiscoverImageCubit extends Cubit<DiscoverImageCubitState> {
       _logger.i('New random image loaded');
       emit(DiscoverImageCubitStateLoaded([...state.images, image]));
       return true;
-    } catch (e) {
+    } catch (e, stackTrace) {
       _logger.e('Random image loading errored out');
+      addError(e, stackTrace);
       emit(DiscoverImageCubitStateError(e.toString(), state.images));
       return false;
     }

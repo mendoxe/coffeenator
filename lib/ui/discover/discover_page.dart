@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cofeenator/bloc/discover_image/discover_image_cubit.dart';
+import 'package:cofeenator/cubit/discover_image/discover_image_cubit.dart';
 import 'package:cofeenator/repository/remote_image_repository.dart';
 import 'package:cofeenator/ui/discover/view/discover_view.dart';
 import 'package:cofeenator/ui/favorites/favorites_page.dart';

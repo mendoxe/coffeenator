@@ -1,5 +1,5 @@
-import 'package:cofeenator/bloc/discover_image/discover_image_cubit.dart';
-import 'package:cofeenator/bloc/discover_image/discover_image_cubit_state.dart';
+import 'package:cofeenator/cubit/discover_image/discover_image_cubit.dart';
+import 'package:cofeenator/cubit/discover_image/discover_image_cubit_state.dart';
 import 'package:cofeenator/ui/discover/widgets/discover_image_list_widget.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_loading_spinner.dart';
 import 'package:cofeenator/utils/extensions/text_style_extensions.dart';

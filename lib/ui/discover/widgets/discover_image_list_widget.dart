@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:cofeenator/bloc/discover_image/discover_image_cubit.dart';
-import 'package:cofeenator/bloc/local_image_list/local_image_list_cubit.dart';
-import 'package:cofeenator/bloc/save_image/save_image_cubit.dart';
+import 'package:cofeenator/cubit/discover_image/discover_image_cubit.dart';
+import 'package:cofeenator/cubit/local_image_list/local_image_list_cubit.dart';
+import 'package:cofeenator/cubit/save_image/save_image_cubit.dart';
 import 'package:cofeenator/repository/local_image_repository.dart';
 import 'package:cofeenator/ui/discover/widgets/discover_image_card.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_error_widget.dart';
@@ -46,39 +46,52 @@ class DiscoverImageListWidget extends StatelessWidget {
       },
       itemBuilder: (context, index) {
         if (hasError && index == images.length) {
-          return Center(
-            child: CoffeenatorErrorWidget(errorMessage: errorMessage),
-          );
+          return const Center(child: CoffeenatorErrorWidget());
         }
         if (index == images.length) {
           return const Center(child: CoffeenatorLoadingSpinner());
         }
 
         return BlocProvider(
-          create: (context) => SaveImageCubit(
-            context.read<LocalImageRepository>(),
-            imageBytes: images[index],
-          ),
-          child: Builder(
-            builder: (context) {
-              return DiscoverImageCard(
-                bytes: images[index],
-                onDisliked: () async {
-                  await context.read<SaveImageCubit>().deleteCurrentImage();
-                  if (!context.mounted) return;
-                  context.read<LocalImageListCubit>().loadAll();
-                },
-                onLiked: () async {
-                  final isSaved = await context.read<SaveImageCubit>().saveCurrentImage();
-                  if (!context.mounted) return;
-                  if (isSaved) {
-                    context.read<LocalImageListCubit>().loadAll();
-                  }
-                },
-              );
-            },
-          ),
+          create: (context) {
+            final cubit = SaveImageCubit(
+              context.read<LocalImageRepository>(),
+              imageBytes: images[index],
+            );
+
+            cubit.checkIfImageSaved();
+            return cubit;
+          },
+          child: DiscoverImageCardWrapper(bytes: images[index]),
         );
+      },
+    );
+  }
+}
+
+class DiscoverImageCardWrapper extends StatelessWidget {
+  const DiscoverImageCardWrapper({
+    required this.bytes,
+    super.key,
+  });
+
+  final Uint8List bytes;
+
+  @override
+  Widget build(BuildContext context) {
+    return DiscoverImageCard(
+      bytes: bytes,
+      onDisliked: () async {
+        await context.read<SaveImageCubit>().deleteCurrentImage();
+        if (!context.mounted) return;
+        context.read<LocalImageListCubit>().loadAll();
+      },
+      onLiked: () async {
+        final isSaved = await context.read<SaveImageCubit>().saveCurrentImage();
+        if (!context.mounted) return;
+        if (isSaved) {
+          context.read<LocalImageListCubit>().loadAll();
+        }
       },
     );
   }

@@ -26,6 +26,9 @@ dev_dependencies:
   bloc_tools: ^0.1.0-dev.20
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.4
+  path_provider_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.8
   very_good_analysis: ^10.1.0
 
 flutter:

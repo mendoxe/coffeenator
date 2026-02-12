@@ -1,5 +1,5 @@
-import 'package:cofeenator/bloc/local_image_list/local_image_list_cubit.dart';
-import 'package:cofeenator/bloc/local_image_list/local_image_list_state.dart';
+import 'package:cofeenator/cubit/local_image_list/local_image_list_cubit.dart';
+import 'package:cofeenator/cubit/local_image_list/local_image_list_state.dart';
 import 'package:cofeenator/ui/favorites/widgets/favorites_image_list_widget.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_error_widget.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_loading_spinner.dart';

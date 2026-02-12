@@ -1,6 +1,6 @@
-import 'package:cofeenator/bloc/local_image/local_image_cubit.dart';
-import 'package:cofeenator/bloc/local_image/local_image_state.dart';
-import 'package:cofeenator/bloc/local_image_list/local_image_list_cubit.dart';
+import 'package:cofeenator/cubit/local_image/local_image_cubit.dart';
+import 'package:cofeenator/cubit/local_image/local_image_state.dart';
+import 'package:cofeenator/cubit/local_image_list/local_image_list_cubit.dart';
 import 'package:cofeenator/repository/local_image_repository.dart';
 import 'package:cofeenator/ui/favorites/widgets/favorites_image_card.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_error_widget.dart';
@@ -25,7 +25,12 @@ class FavoritesImageListWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: BlocProvider(
-            create: (context) => LocalImageCubit(context.read<LocalImageRepository>(), imageHash: imageHash),
+            create: (context) {
+              final cubit = LocalImageCubit(context.read<LocalImageRepository>(), imageHash: imageHash);
+              cubit.loadImage();
+
+              return cubit;
+            },
             child: BlocConsumer<LocalImageCubit, LocalImageState>(
               builder: (context, state) {
                 return switch (state) {

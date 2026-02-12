@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:cofeenator/bloc/save_image/save_image_cubit.dart';
-import 'package:cofeenator/bloc/save_image/save_image_state.dart';
+import 'package:cofeenator/cubit/save_image/save_image_cubit.dart';
+import 'package:cofeenator/cubit/save_image/save_image_state.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_icon_button.dart';
 import 'package:cofeenator/ui/widgets/coffeenator_loading_spinner.dart';
 import 'package:cofeenator/utils/extensions/context_extensions.dart';
