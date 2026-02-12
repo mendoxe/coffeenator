@@ -38,9 +38,9 @@ class DiscoverImageCard extends StatelessWidget {
         ),
         BlocConsumer<SaveImageCubit, SaveImageState>(
           builder: (context, state) {
-            return Center(
-              child: SizedBox(
-                height: 70,
+            return SizedBox(
+              height: 70,
+              child: Center(
                 child: switch (state) {
                   SaveImageStateLoading() => const CoffeenatorLoadingSpinner(),
                   SaveImageStateSaved() => CoffeenatorIconButton(
